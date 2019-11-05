@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import { 
     setDictionarySecret, 
-    setDefaultTargetLanguage
+    setDefaultTargetLanguage,
+    setPixabaySecret
  } from './actions/ConfigActions'
 import Home from './Home'
 
@@ -13,7 +14,8 @@ const mapStateToProps = state => {
 
 const HomeContainer = connect(mapStateToProps, {
     setDictionarySecret,
-    setDefaultTargetLanguage
+    setDefaultTargetLanguage,
+    setPixabaySecret
 })(Home);
 
 export default HomeContainer;

@@ -4,6 +4,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import HomeContainer from './HomeContainer'
 import SettingsContainer from './components/SettingsContainer'
 import EnterTranslatedWordContainer from './components/steps/EnterTranslatedWordScreenContainer'
+import SelectImageContainer from './components/steps/SelectImageContainer'
 import { createStore, combineReducers } from 'redux'
 import ConfigReducer from './reducers/ConfigReducer'
 import CurrentCardReducer from './reducers/CurrentCardReducer'
@@ -13,7 +14,8 @@ import Colors from './utils/Colors'
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeContainer},
   Settings: {screen: SettingsContainer},
-  EnterTranslatedWord: {screen: EnterTranslatedWordContainer}
+  EnterTranslatedWord: {screen: EnterTranslatedWordContainer},
+  SelectImage: {screen: SelectImageContainer}
 },
 {
    defaultNavigationOptions: {

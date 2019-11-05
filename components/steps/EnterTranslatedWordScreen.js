@@ -1,9 +1,32 @@
-import React from 'react';
-import { StyleSheet, View, Text, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, TextInput, Button, ActivityIndicator } from 'react-native';
+import Colors from '../../utils/Colors'
+import Constants from '../../utils/Constants'
+import ApiUtils from '../../utils/ApiUtils'
+import Translation from './Translation'
 
 const EnterTranslatedWordScreen = props => {
+  const [isIndicatorActive, setIsIndicatorActive] = useState(false);
 
-  console.log(props);
+  const handleContinue = () => {
+    setIsIndicatorActive(true);
+
+    const url = `${Constants.PONS_API}?l=${props.config.defaultTargetLanguage.code}&in=${props.config.defaultTargetLanguage.source}&q=${props.currentCard.translatedWord}`
+
+    fetch(url, {
+      method: 'GET',
+      headers: { 'X-Secret': props.config.dictionarySecret }
+    }).then(response => response.json())
+      .then(response => {
+        props.setApiResponse(ApiUtils.processApiResponse(response))
+        setIsIndicatorActive(false);
+    })
+  }
+
+  const handleOnTranslationPress = translation => {
+    props.setChosenCard(translation);
+    props.navigation.navigate('SelectImage')
+  }
 
   return (
     <View style={styles.container}>
@@ -15,6 +38,19 @@ const EnterTranslatedWordScreen = props => {
         multiline={true}
         placeholder="Word to translate"
       />
+      <Button
+        title="CONTINUE"
+        disabled={!props.currentCard.translatedWord}
+        onPress={handleContinue}
+      />
+      {isIndicatorActive && (
+        <ActivityIndicator size={60} color={Colors.Purple} />
+      )}
+      {(props.currentCard.apiResponse && props.currentCard.apiResponse.translations) && 
+        props.currentCard.apiResponse.translations.map(translation => 
+          <Translation key={translation.front + translation.back} translation={translation} onPress={() => handleOnTranslationPress(translation)}/>
+        )
+      }
     </View>
   );
 }

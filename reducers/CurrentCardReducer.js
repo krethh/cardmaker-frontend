@@ -1,4 +1,4 @@
-import { SET_TRANSLATED_WORD } from '../actions/CurrentCardActions'
+import { SET_TRANSLATED_WORD, SET_API_RESPONSE, SET_CHOSEN_CARD } from '../actions/CurrentCardActions'
 
 const currentCardReducer = (state = {}, action) => {
     switch (action.type) {
@@ -6,6 +6,18 @@ const currentCardReducer = (state = {}, action) => {
             return {
                 ...state,
                 translatedWord: action.value
+            }
+        }
+        case SET_API_RESPONSE: {
+            return {
+                ...state,
+                apiResponse: action.value
+            }
+        }
+        case SET_CHOSEN_CARD: {
+            return {
+                ...state,
+                chosenCard: action.value
             }
         }
         default: {

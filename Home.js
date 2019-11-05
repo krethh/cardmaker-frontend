@@ -9,7 +9,8 @@ import ConfigKeys from './config/ConfigKeys'
 import Languages from './config/Languages'
 import {
   getDictionarySecretFromStorage,
-  getDefaultTargetLanguageFromStorage
+  getDefaultTargetLanguageFromStorage,
+  getPixabaySecretFromStorage
 } from './actions/ConfigActions'
 
 const Home = props => {
@@ -57,6 +58,11 @@ const Home = props => {
         if (value === null) {
           props.setDefaultTargetLanguage(Languages.POLISH_GERMAN)
         }
+      })
+
+    getPixabaySecretFromStorage()
+      .then(value => {
+        props.setPixabaySecret(value);
       })
   }
 

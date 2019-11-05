@@ -1,8 +1,22 @@
 import React, { useEffect } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, TextInput, Picker } from 'react-native';
 import Languages from '../config/Languages'
+import { 
+    persistDefaultTargetLanguage, 
+    persistDictionarySecret, 
+    persistPixabaySecret  
+} from '../actions/ConfigActions'
 
 const Settings = props => {
+
+    useEffect(() => {
+        return () => {
+            persistDictionarySecret(props.config.dictionarySecret)
+            persistPixabaySecret(props.config.pixabaySecret)
+            persistDefaultTargetLanguage(props.config.defaultTargetLanguage)
+        }
+    }, [])
+
     return (
         <View style={styles.container}>
             <Text style={styles.label}>
@@ -15,6 +29,16 @@ const Settings = props => {
                     onChangeText={text => props.setDictionarySecret(text)}
                     multiline={true}
                     placeholder="Dictionary API Secret"
+                    numberOfLines={5}
+                />
+            </View>
+            <View style={styles.inputLimiter}>
+                <TextInput
+                    style={styles.inputStyle}
+                    value={props.config.pixabaySecret}
+                    onChangeText={text => props.setPixabaySecret(text)}
+                    multiline={true}
+                    placeholder="Pixabay API Secret"
                     numberOfLines={5}
                 />
             </View>

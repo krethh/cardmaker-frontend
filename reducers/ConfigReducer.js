@@ -1,5 +1,6 @@
 import { 
-    SET_DICTIONARY_SECRET, 
+    SET_DICTIONARY_SECRET,
+    SET_PIXABAY_SECRET, 
     SET_DEFAULT_TARGET_LANGUAGE 
 } from '../actions/ConfigActions'
 
@@ -14,6 +15,12 @@ const configReducer = (state = {}, action) => {
             return {
                 ...state,
                 defaultTargetLanguage: action.value
+            }
+        }
+        case SET_PIXABAY_SECRET: {
+            return {
+                ...state,
+                pixabaySecret: action.value
             }
         }
         default: {

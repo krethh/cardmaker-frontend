@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import EnterTranslatedWordScreen from './EnterTranslatedWordScreen'
-import { setTranslatedWord } from '../../actions/CurrentCardActions'
+import { setTranslatedWord, setApiResponse, setChosenCard } from '../../actions/CurrentCardActions'
 
 const mapStateToProps = state => {
   return {
@@ -10,7 +10,9 @@ const mapStateToProps = state => {
 }
 
 const EnterTranslatedWordScreenContainer = connect(mapStateToProps, {
-  setTranslatedWord
+  setTranslatedWord,
+  setApiResponse,
+  setChosenCard
 })(EnterTranslatedWordScreen)
 
 export default EnterTranslatedWordScreenContainer;
