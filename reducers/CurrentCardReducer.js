@@ -1,4 +1,4 @@
-import { SET_TRANSLATED_WORD, SET_API_RESPONSE, SET_CHOSEN_CARD } from '../actions/CurrentCardActions'
+import { SET_TRANSLATED_WORD, SET_API_RESPONSE, SET_CHOSEN_CARD, SET_IMAGE, SET_EXAMPLE_SENTENCE } from '../actions/CurrentCardActions'
 
 const currentCardReducer = (state = {}, action) => {
     switch (action.type) {
@@ -18,6 +18,18 @@ const currentCardReducer = (state = {}, action) => {
             return {
                 ...state,
                 chosenCard: action.value
+            }
+        }
+        case SET_IMAGE: {
+            return {
+                ...state,
+                image: action.value
+            }
+        }
+        case SET_EXAMPLE_SENTENCE: {
+            return {
+                ...state,
+                exampleSentence: action.value
             }
         }
         default: {

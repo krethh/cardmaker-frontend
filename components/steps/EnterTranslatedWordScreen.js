@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, ActivityIndicator, FlatList } from 'react-native';
 import Colors from '../../utils/Colors'
 import Constants from '../../utils/Constants'
 import ApiUtils from '../../utils/ApiUtils'
@@ -20,7 +20,7 @@ const EnterTranslatedWordScreen = props => {
       .then(response => {
         props.setApiResponse(ApiUtils.processApiResponse(response))
         setIsIndicatorActive(false);
-    })
+      })
   }
 
   const handleOnTranslationPress = translation => {
@@ -46,10 +46,14 @@ const EnterTranslatedWordScreen = props => {
       {isIndicatorActive && (
         <ActivityIndicator size={60} color={Colors.Purple} />
       )}
-      {(props.currentCard.apiResponse && props.currentCard.apiResponse.translations) && 
-        props.currentCard.apiResponse.translations.map(translation => 
-          <Translation key={translation.front + translation.back} translation={translation} onPress={() => handleOnTranslationPress(translation)}/>
-        )
+      {(props.currentCard.apiResponse && props.currentCard.apiResponse.translations) &&
+        <View style={styles.flatListContainer}>
+          <FlatList
+            data={props.currentCard.apiResponse.translations}
+            renderItem={({ item }) => <Translation key={item.front + item.back} translation={item} onPress={() => handleOnTranslationPress(item)} />}
+            keyExtractor={translation => translation.front + translation.back}
+          />
+        </View>
       }
     </View>
   );
@@ -66,6 +70,11 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     width: "90%"
+  },
+  flatListContainer: {
+    marginTop: 10,
+    marginBottom: 80,
+    maxHeight: "60%"
   }
 });
 

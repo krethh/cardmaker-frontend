@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 const Translation = props => {
+    
     return (
         <TouchableOpacity onPress={props.onPress}>
             <View style={styles.translation}>

@@ -32,6 +32,9 @@ const Settings = props => {
                     numberOfLines={5}
                 />
             </View>
+            <Text style={styles.label}>
+                Pixabay API Secret
+            </Text>
             <View style={styles.inputLimiter}>
                 <TextInput
                     style={styles.inputStyle}
