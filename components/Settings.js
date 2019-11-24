@@ -56,7 +56,7 @@ const Settings = props => {
                 }}
             >
                 {Object.keys(Languages).map(key => (
-                    <Picker.Item label={Languages[key].label} value={Languages[key].code} key={Languages[key].label} />
+                    <Picker.Item label={Languages[key].label} value={Languages[key]} key={Languages[key].label} />
                 ))}
             </Picker>
         </View>

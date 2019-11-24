@@ -7,6 +7,7 @@ import Translation from './Translation'
 
 const EnterTranslatedWordScreen = props => {
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
+  const [noResults, setNoResults] = useState(false);
 
   const handleContinue = () => {
     setIsIndicatorActive(true);
@@ -19,6 +20,12 @@ const EnterTranslatedWordScreen = props => {
     }).then(response => response.json())
       .then(response => {
         props.setApiResponse(ApiUtils.processApiResponse(response))
+        setIsIndicatorActive(false);
+        setNoResults(false);
+      })
+      .catch(err => {
+        props.setApiResponse(null);
+        setNoResults(true);
         setIsIndicatorActive(false);
       })
   }
@@ -55,6 +62,11 @@ const EnterTranslatedWordScreen = props => {
           />
         </View>
       }
+      {noResults && 
+        <View style={styles.flatListContainer}>
+          <Text style={styles.noResultsText}>No results or erroneous query</Text>
+        </View>
+      }
     </View>
   );
 }
@@ -75,6 +87,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 80,
     maxHeight: "60%"
+  },
+  noResultsText: {
+    fontSize: 24,
+    fontWeight: "bold"
   }
 });
 

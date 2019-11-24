@@ -12,6 +12,8 @@ const configReducer = (state = {}, action) => {
                 dictionarySecret: action.value
             }
         case SET_DEFAULT_TARGET_LANGUAGE: {
+
+            console.log(action);
             return {
                 ...state,
                 defaultTargetLanguage: action.value

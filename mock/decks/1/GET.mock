@@ -1,0 +1,13 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+[
+        {
+            "id": 1,
+            "name": "Some deck"
+        },
+        {
+            "id": 2,
+            "name": "Some other deck"
+        }
+]
