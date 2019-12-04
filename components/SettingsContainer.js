@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import { 
     setDictionarySecret, 
     setDefaultTargetLanguage,
-    setPixabaySecret
+    setPixabaySecret,
+    setBackendUrl
  } from '../actions/ConfigActions'
 import Settings from './Settings'
 
@@ -15,7 +16,8 @@ const mapStateToProps = state => {
 const SettingsContainer = connect(mapStateToProps, {
     setDictionarySecret,
     setDefaultTargetLanguage,
-    setPixabaySecret
+    setPixabaySecret,
+    setBackendUrl
 })(Settings);
 
 export default SettingsContainer;

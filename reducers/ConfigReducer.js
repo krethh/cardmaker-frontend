@@ -1,10 +1,14 @@
 import { 
     SET_DICTIONARY_SECRET,
     SET_PIXABAY_SECRET, 
-    SET_DEFAULT_TARGET_LANGUAGE 
+    SET_DEFAULT_TARGET_LANGUAGE, 
+    SET_BACKEND_URL,
+    SET_SESSION_TOKEN
 } from '../actions/ConfigActions'
 
 const configReducer = (state = {}, action) => {
+    console.log(action);    
+
     switch (action.type) {
         case SET_DICTIONARY_SECRET:
             return {
@@ -12,8 +16,6 @@ const configReducer = (state = {}, action) => {
                 dictionarySecret: action.value
             }
         case SET_DEFAULT_TARGET_LANGUAGE: {
-
-            console.log(action);
             return {
                 ...state,
                 defaultTargetLanguage: action.value
@@ -23,6 +25,18 @@ const configReducer = (state = {}, action) => {
             return {
                 ...state,
                 pixabaySecret: action.value
+            }
+        }
+        case SET_BACKEND_URL: {
+            return {
+                ...state,
+                backendUrl: action.value
+            }
+        }
+        case SET_SESSION_TOKEN: {
+            return {
+                ...state,
+                sessionToken: action.value
             }
         }
         default: {

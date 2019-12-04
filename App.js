@@ -7,12 +7,9 @@ import EnterTranslatedWordContainer from './components/steps/EnterTranslatedWord
 import EnterExampleSentenceContainer from './components/steps/EnterExampleSentenceContainer'
 import SelectImageContainer from './components/steps/SelectImageContainer'
 import AddToDeckContainer from './components/steps/AddToDeckContainer'
-import { createStore, combineReducers } from 'redux'
-import ConfigReducer from './reducers/ConfigReducer'
-import CurrentCardReducer from './reducers/CurrentCardReducer'
-import UserInfoReducer from './reducers/UserInfoReducer'
 import { Provider } from 'react-redux';
 import Colors from './utils/Colors'
+import store from './utils/Store'
 
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeContainer},
@@ -32,14 +29,6 @@ const MainNavigator = createStackNavigator({
 });
 
 const Navigation = createAppContainer(MainNavigator);
-
-const store = createStore(
-  combineReducers({
-    config: ConfigReducer,
-    currentCard: CurrentCardReducer,
-    userInfo: UserInfoReducer
-  })
-)
 
 export default class App extends React.Component {
   render () {

@@ -2,8 +2,13 @@ import { connect } from 'react-redux';
 import { 
     setDictionarySecret, 
     setDefaultTargetLanguage,
-    setPixabaySecret
+    setPixabaySecret,
+    setBackendUrl,
+    setSessionToken
  } from './actions/ConfigActions'
+import {
+    setUserDecks
+} from './actions/UserInfoActions'
 import Home from './Home'
 
 const mapStateToProps = state => {
@@ -15,7 +20,10 @@ const mapStateToProps = state => {
 const HomeContainer = connect(mapStateToProps, {
     setDictionarySecret,
     setDefaultTargetLanguage,
-    setPixabaySecret
+    setPixabaySecret,
+    setBackendUrl,
+    setSessionToken,
+    setUserDecks
 })(Home);
 
 export default HomeContainer;

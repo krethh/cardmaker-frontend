@@ -37,7 +37,7 @@ const AddToDeck = props => {
             <Text style={styles.header}>
                 Select target deck
             </Text>
-            {props.userInfo.decks.map(deck => (
+            {props.userInfo.userDecks.map(deck => (
                 <SelectableDeck {...deck} key={deck.id} checked={!!checkedIndices[deck.id]} onPress={() => toggleChecked(deck.id)} />
             ))}
             <Button title="Send" color={Colors.Purple} onPress={sendCard}/>

@@ -1,15 +1,13 @@
-const userInfoReducer = (state = {
-    decks: [{
-        id: 1,
-        label: "First deck"
-    },
-    {
-        id: 2,
-        label: "Second deck"
-    }
-    ]
-}, action) => {
+import { SET_USER_DECKS } from '../actions/UserInfoActions'
+
+const userInfoReducer = (state = {}, action) => {
     switch (action.type) {
+        case SET_USER_DECKS: {
+            return {
+                ...state,
+                userDecks: action.value
+            }
+        }
         default:
             return state;
     }
