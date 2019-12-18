@@ -13,7 +13,8 @@ import Home from './Home'
 
 const mapStateToProps = state => {
     return {
-        config: state.config
+        config: state.config,
+        userInfo: state.userInfo
     }
 }
 

@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import SelectableDeck from './SelectableDeck'
+import WS from '../../utils/WS';
 
 const AddToDeck = props => {
 
     const [checkedIndices, setCheckedIndices] = useState({})
+    const [backButtonVisible, setBackButtonVisible] = useState(false)
+    const [cardPostingMessage, setCardPostingMessage] = useState(null)
 
     const toggleChecked = id => {
         if (!!checkedIndices[id]) {
@@ -20,6 +23,10 @@ const AddToDeck = props => {
         }
     }
 
+    const onPressBack = () => {
+        props.navigation.navigate('Home')
+    }
+
     const sendCard = () => {
         const apiRequest = {
             chosenCard: props.currentCard.chosenCard,
@@ -29,7 +36,16 @@ const AddToDeck = props => {
             translatedWord: props.currentCard.translatedWord
         }
 
-        console.log(apiRequest)
+        WS.postCard(apiRequest)
+            .then(response => {
+                console.log(response.status)
+                setBackButtonVisible(true)
+                setCardPostingMessage("Card added successfully.")
+            })
+            .catch(error => {
+                setBackButtonVisible(true)
+                setCardPostingMessage("Could not add card!")
+            })
     }
 
     return (
@@ -40,7 +56,13 @@ const AddToDeck = props => {
             {props.userInfo.userDecks.map(deck => (
                 <SelectableDeck {...deck} key={deck.id} checked={!!checkedIndices[deck.id]} onPress={() => toggleChecked(deck.id)} />
             ))}
+            {cardPostingMessage && (
+                <Text>{cardPostingMessage}</Text>
+            )}
             <Button title="Send" color={Colors.Purple} onPress={sendCard}/>
+            {backButtonVisible && (
+                <Button title="Back" color={Colors.Purple} onPress={onPressBack}/>
+            )}
         </View>
     );
 }
@@ -48,6 +70,9 @@ const AddToDeck = props => {
 const styles = StyleSheet.create({
     container: {
         alignItems: "center"
+    },
+    responseMessage: {
+        fontWeight: "bold"
     },
     header: {
         fontSize: 24,

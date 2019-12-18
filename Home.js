@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Toolbar } from 'react-native-material-ui';
 import MenuTile from './components/MenuTile';
@@ -21,6 +21,8 @@ import { persistSessionToken } from './actions/ConfigActions'
 const Home = props => {
   const { navigate } = props.navigation;
 
+  let nextScreen = null;
+
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false)
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
 
@@ -30,8 +32,10 @@ const Home = props => {
       return;
     }
 
+    nextScreen = 'EnterTranslatedWord'
+
     if (!props.config.sessionToken) {
-      setIsLoginModalOpen(true);
+      setIsLoginModalOpen(true)
       return;
     }
 
@@ -43,7 +47,14 @@ const Home = props => {
   }
 
   const onDiscoverPress = () => {
+    nextScreen = 'Discover';
 
+    if (!props.config.sessionToken) {
+      setIsLoginModalOpen(true)
+      return;
+    }
+
+    fetchDecksAndNavigateFurther()
   }
 
   const onInfoPress = () => {
@@ -108,7 +119,7 @@ const Home = props => {
     signInWithGoogleAsync().then(response => {
       props.setSessionToken(response)
       setIsLoginModalOpen(false);
-      
+
 
       // TODO: perform actual session token logic
       persistSessionToken(response);
@@ -117,23 +128,25 @@ const Home = props => {
   }
 
   const fetchDecksAndNavigateFurther = () => {
-    WS.getDecks().then(response => {
-      props.setUserDecks(response.data);
-    })
+    if (!props.userInfo.userDecks) {
+      WS.getDecks().then(response => {
+        props.setUserDecks(response.data);
+      })
+    }
 
-    navigate('EnterTranslatedWord')
+    navigate(nextScreen)
   }
 
   return (
     <View style={styles.container}>
-      <WarningModal 
+      <WarningModal
         header="Are you sure?"
         text="No Dictionary API Secret is set in the settings. No dictionary queries will be possible. To go to Settings, press Continue."
         onContinue={navigateToSettings}
         onCancel={() => setIsSettingsModalOpen(false)}
         isModalOpen={isSettingsModalOpen}
       />
-      <WarningModal 
+      <WarningModal
         header="Login"
         text="You need to login with Google before continuing."
         onContinue={handleLogin}
@@ -148,7 +161,7 @@ const Home = props => {
         </View>
         <View style={styles.tilesContainer}>
           <MenuTile text="Discover" onPress={onDiscoverPress} />
-          <MenuTile text="Info" onPress={() => {}} />
+          <MenuTile text="Info" onPress={() => { }} />
         </View>
       </View>
     </View>

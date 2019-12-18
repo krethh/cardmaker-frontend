@@ -10,6 +10,7 @@ import AddToDeckContainer from './components/steps/AddToDeckContainer'
 import { Provider } from 'react-redux';
 import Colors from './utils/Colors'
 import store from './utils/Store'
+import DiscoveryContainer from './components/discovery/DiscoveryContainer';
 
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeContainer},
@@ -17,6 +18,7 @@ const MainNavigator = createStackNavigator({
   EnterTranslatedWord: {screen: EnterTranslatedWordContainer},
   SelectImage: {screen: SelectImageContainer},
   EnterExampleSentence: {screen: EnterExampleSentenceContainer},
+  Discover: {screen: DiscoveryContainer},
   AddToDeck: {screen: AddToDeckContainer}
 },
 {

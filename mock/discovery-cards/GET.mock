@@ -1,0 +1,31 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+[
+        {
+            "id": 1,
+            "front": "Kot",
+            "back": "Katze",
+            "type": "noun",
+            "gender": "M",
+            "exampleSentence": "eine Katze haben",
+            "image": "https://cdn.pixabay.com/photo/2018/03/26/20/49/tiger-3264048_150.jpg"
+        },
+        {
+            "id": 2,
+            "front": "duży",
+            "back": "gross",
+            "type": "adjective",
+            "image": "https://cdn.pixabay.com/photo/2016/11/29/10/07/animal-1868911_150.jpg",
+            "exampleSentence": "einen grossen Hunger haben"
+        },
+        {
+            "id": 3,
+            "front": "spać",
+            "back": "schlafen",
+            "type": "verb",
+            "image": "https://cdn.pixabay.com/photo/2017/05/11/08/51/womens-2303383_150.jpg",
+            "exampleSentence": "Ich habe schon lange nicht geschlafen"
+        }
+    
+]
