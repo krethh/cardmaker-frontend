@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import Colors from './utils/Colors'
 import store from './utils/Store'
 import DiscoveryContainer from './components/discovery/DiscoveryContainer';
+import SubscriptionsContainer from './components/subscriptions/SubscriptionsContainer';
 
 const MainNavigator = createStackNavigator({
   Home: {screen: HomeContainer},
@@ -19,7 +20,8 @@ const MainNavigator = createStackNavigator({
   SelectImage: {screen: SelectImageContainer},
   EnterExampleSentence: {screen: EnterExampleSentenceContainer},
   Discover: {screen: DiscoveryContainer},
-  AddToDeck: {screen: AddToDeckContainer}
+  AddToDeck: {screen: AddToDeckContainer},
+  Subscriptions: {screen: SubscriptionsContainer}
 },
 {
    defaultNavigationOptions: {

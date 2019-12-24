@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+[
+        {
+            "id": "1",
+            "name": "Niemiecki",
+            "description": "Talia kart, służących do nauki niemieckiego",
+            "owner": "petrerw",
+            "alreadySubscribed": false
+        },
+        {
+            "id": "2",
+            "name": "Rosyjski",
+            "description": "Talia kart, służących do nauki rosyjskiego",
+            "owner": "petrerw",
+            "alreadySubscribed": true
+        }
+]

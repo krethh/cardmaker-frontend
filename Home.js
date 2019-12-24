@@ -137,6 +137,10 @@ const Home = props => {
     navigate(nextScreen)
   }
 
+  const onSubscriptionsPress = () => {
+    navigate("Subscriptions")
+  }
+
   return (
     <View style={styles.container}>
       <WarningModal
@@ -161,7 +165,7 @@ const Home = props => {
         </View>
         <View style={styles.tilesContainer}>
           <MenuTile text="Discover" onPress={onDiscoverPress} />
-          <MenuTile text="Info" onPress={() => { }} />
+          <MenuTile text="Subscriptions" onPress={onSubscriptionsPress} />
         </View>
       </View>
     </View>
