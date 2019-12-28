@@ -3,5 +3,5 @@ export default Colors = {
     LightGreen: "#84ff21",
     Blue: "#3c98ff",
     Purple: "#802Ce8",
-    Red: "ff306f"
+    Red: "#ff306f"
 }

@@ -44,7 +44,6 @@ const Discovery = props => {
     }
 
     onAddPress = () => {
-        console.log(checkedIndices)
         setChosenCards([
             ...chosenCards,
             {
@@ -62,6 +61,7 @@ const Discovery = props => {
 
     incrementOrEnd = () => {
         if (currentCard === discoveryCards.length - 1) {
+            console.log(JSON.stringify(chosenCards))
             WS.postDiscoveryCards(chosenCards)
                 .then(response => {
                     setDiscoveryFinished(true)

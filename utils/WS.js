@@ -34,6 +34,18 @@ class WS {
             headers: { 'Authorization': store.getState().config.sessionToken }
         })
     }
+
+    getSubscribableDecksWithSearch(namePrefix) {
+        return axios.get(`${store.getState().config.backendUrl}/subscribable-decks?namePrefix=${namePrefix}`, {
+            headers: { 'Authorization': store.getState().config.sessionToken }
+        })
+    }
+
+    postDeckSubscription(id) {
+        return axios.post(`${store.getState().config.backendUrl}/subscriptions`, { id }, {
+            headers: { 'Authorization': store.getState().config.sessionToken }
+        })
+    }
 }
 
 export default new WS();
