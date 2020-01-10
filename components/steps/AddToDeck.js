@@ -29,11 +29,11 @@ const AddToDeck = props => {
 
     const sendCard = () => {
         const apiRequest = {
-            chosenCard: props.currentCard.chosenCard,
+            front: props.currentCard.chosenCard.front,
+            back: props.currentCard.chosenCard.back,
             exampleSentence: props.currentCard.exampleSentence,
-            image: props.currentCard.image,
-            targetDecks: Object.keys(checkedIndices).filter(key => !!checkedIndices[key]),
-            translatedWord: props.currentCard.translatedWord
+            image: props.currentCard.image.previewURL,
+            targetDecks: Object.keys(checkedIndices).filter(key => !!checkedIndices[key])
         }
 
         WS.postCard(apiRequest)
@@ -54,7 +54,7 @@ const AddToDeck = props => {
                 Select target deck
             </Text>
             {props.userInfo.userDecks.map(deck => (
-                <SelectableDeck {...deck} key={deck.id} checked={!!checkedIndices[deck.id]} onPress={() => toggleChecked(deck.id)} />
+                <SelectableDeck {...deck} key={deck.deckId} checked={!!checkedIndices[deck.id]} onPress={() => toggleChecked(deck.id)} />
             ))}
             {cardPostingMessage && (
                 <Text>{cardPostingMessage}</Text>

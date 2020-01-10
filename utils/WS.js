@@ -46,6 +46,10 @@ class WS {
             headers: { 'Authorization': store.getState().config.sessionToken }
         })
     }
+
+    postLogin(googleToken) {
+        return axios.post(`${store.getState().config.backendUrl}/login`, googleToken)
+    }
 }
 
 export default new WS();

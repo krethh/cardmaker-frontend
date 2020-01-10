@@ -6,7 +6,7 @@ const SelectableDeck = props => {
 
     return (
         <View>
-            <Text style={styles.text}>{props.label}</Text>
+            <Text style={styles.text}>{props.name}</Text>
             <TouchableOpacity style={styles.circle} onPress={props.onPress} >
                 {props.checked && <View style={styles.checkedCircle} />}
             </TouchableOpacity>

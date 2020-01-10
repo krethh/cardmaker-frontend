@@ -56,11 +56,7 @@ const Home = props => {
 
     fetchDecksAndNavigateFurther()
   }
-
-  const onInfoPress = () => {
-
-  }
-
+  
   async function signInWithGoogleAsync() {
     try {
       const result = await Google.logInAsync({
@@ -117,13 +113,14 @@ const Home = props => {
 
   const handleLogin = () => {
     signInWithGoogleAsync().then(response => {
-      props.setSessionToken(response)
-      setIsLoginModalOpen(false);
-
-
-      // TODO: perform actual session token logic
-      persistSessionToken(response);
-      fetchDecksAndNavigateFurther();
+      WS.postLogin({ token: response })
+        .then(response => {
+          console.log(response.data.token)
+          props.setSessionToken(response.data.token)
+          persistSessionToken(response.data.token);
+          setIsLoginModalOpen(false);
+          fetchDecksAndNavigateFurther();
+        })
     })
   }
 
