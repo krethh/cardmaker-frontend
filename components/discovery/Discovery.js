@@ -79,12 +79,18 @@ const Discovery = props => {
     return (
         <View>
             {errorMessage && (
-                <View>
-                    <Text style={styles.errorMessage}></Text>
+                <View style={styles.messageContainer}>
+                    <Text style={styles.errorMessage}>{errorMessage}</Text>
                     <Button title="Back" onPress={() => { props.navigation.navigate('Home') }} />
                 </View>
             )}
-            {discoveryCards && !errorMessage && (
+            {discoveryCards && discoveryCards.length == 0 && (
+                <View style={styles.messageContainer}>
+                    <Text style={styles.errorMessage}>No cards to review this time!</Text>
+                    <Button title="Back" onPress={() => { props.navigation.navigate('Home') }} />
+                </View>
+            )}
+            {discoveryCards && discoveryCards.length > 0 && !errorMessage && (
                 <View>
                     <DiscoveryCard {...discoveryCards[currentCard]} />
                     <View style={styles.buttonsContainer}>
@@ -132,6 +138,9 @@ const styles = StyleSheet.create({
     finishedMessage: {
         fontWeight: "bold",
         fontSize: 30
+    },
+    messageContainer: {
+        margin: 10
     }
 });
 

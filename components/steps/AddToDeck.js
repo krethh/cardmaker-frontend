@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import SelectableDeck from './SelectableDeck'
 import WS from '../../utils/WS';
+import Colors from '../../utils/Colors'
 
 const AddToDeck = props => {
 
@@ -57,11 +58,19 @@ const AddToDeck = props => {
                 <SelectableDeck {...deck} key={deck.deckId} checked={!!checkedIndices[deck.id]} onPress={() => toggleChecked(deck.id)} />
             ))}
             {cardPostingMessage && (
-                <Text>{cardPostingMessage}</Text>
+                <View style={styles.cardPostingMessageContainer}>
+                    <Text style={styles.cardPostingMessage}>{cardPostingMessage}</Text>
+                </View>
             )}
-            <Button title="Send" color={Colors.Purple} onPress={sendCard}/>
+            {!backButtonVisible && (
+                <View style={styles.buttonContainer}>
+                    <Button title="Send" color={Colors.Purple} onPress={sendCard} />
+                </View>
+            )}
             {backButtonVisible && (
-                <Button title="Back" color={Colors.Purple} onPress={onPressBack}/>
+                <View style={styles.buttonContainer}>
+                    <Button title="Back" color={Colors.Green} onPress={onPressBack} />
+                </View>
             )}
         </View>
     );
@@ -74,9 +83,21 @@ const styles = StyleSheet.create({
     responseMessage: {
         fontWeight: "bold"
     },
+    cardPostingMessage: {
+        fontWeight: "bold",
+        fontSize: 18
+    },
+    cardPostingMessageContainer: {
+        margin: 10
+    },
+    buttonContainer: {
+        width: "30%",
+        height: 20
+    },
     header: {
         fontSize: 24,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginBottom: 20
     }
 });
 

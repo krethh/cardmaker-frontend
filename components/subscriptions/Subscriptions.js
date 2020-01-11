@@ -39,10 +39,10 @@ const Subscriptions = props => {
     toggleSubscribe = id => {
         WS.postDeckSubscription(id)
             .then(response => {
-                const deckToChange = subscribableDecks.find(deck => deck.id === selectedDeckId)
-                deckToChange.alreadySubscribed = !deckToChange.alreadySubscribed
+                const deckToChange = subscribableDecks.find(deck => deck.deckId === selectedDeckId)
+                deckToChange.subscribed = !deckToChange.subscribed
                 setSubscribableDecks([
-                    ...subscribableDecks.filter(deck => deck.id !== selectedDeckId),
+                    ...subscribableDecks.filter(deck => deck.deckId !== selectedDeckId),
                     deckToChange
                 ])
             })
@@ -55,7 +55,7 @@ const Subscriptions = props => {
         <View>
             <SubscriptionDetailsModal
                 modalVisible={!!selectedDeckId}
-                deck={!!selectedDeckId && subscribableDecks.find(deck => deck.id === selectedDeckId)}
+                deck={!!selectedDeckId && subscribableDecks.find(deck => deck.deckId === selectedDeckId)}
                 onToggleSubscribe={() => toggleSubscribe(selectedDeckId)}
                 onBackPress={() => setSelectedDeckId(null)}
                 errorMessage={errorMessage}
@@ -76,8 +76,8 @@ const Subscriptions = props => {
                 <View>
                     <FlatList
                         data={subscribableDecks}
-                        renderItem={({ item }) => <PotentialSubscribtion  {...item} onPress={() => handleOnDeckPress(item.id)} />}
-                        keyExtractor={deck => deck.id}
+                        renderItem={({ item }) => <PotentialSubscribtion  {...item} onPress={() => handleOnDeckPress(item.deckId)} />}
+                        keyExtractor={deck => deck.deckId}
                     />
                 </View>
             )}
@@ -101,7 +101,13 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     inputStyle: {
-        width: "90%"
+        width: "90%",
+        margin: 10
+    },
+    label: {
+        marginTop: 10,
+        fontSize: 18,
+        fontWeight: "bold"
     }
 });
 

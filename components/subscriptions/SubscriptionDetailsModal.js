@@ -34,13 +34,13 @@ const SubscriptionDetailsModal = props => {
                     Owner
                     </Text>
                 <Text style={styles.property}>
-                    {props.deck.owner}
+                    {props.deck.creatorId}
                 </Text>
                 <View style={styles.buttonsContainer}>
                     <View style={styles.button}>
                         <Button
-                            title={props.deck.alreadySubscribed ? "UNSUBSCRIBE" : "SUBSCRIBE"}
-                            color={props.deck.alreadySubscribed ? Colors.Purple : Colors.Red}
+                            title={props.deck.subscribed ? "UNSUBSCRIBE" : "SUBSCRIBE"}
+                            color={props.deck.subscribed ? Colors.Purple : Colors.Red}
                             onPress={handleToggleSubscribe}
                             disabled={activityIndicatorActive}
                         />
@@ -54,7 +54,7 @@ const SubscriptionDetailsModal = props => {
                     </View>
                 </View>
                 {props.errorMessage && (
-                    <Text>{errorMessage}</Text>
+                    <Text>{props.errorMessage}</Text>
                 )}
                 {activityIndicatorActive && (
                     <ActivityIndicator size="large" />

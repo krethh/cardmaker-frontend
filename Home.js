@@ -162,7 +162,7 @@ const Home = props => {
         </View>
         <View style={styles.tilesContainer}>
           <MenuTile text="Discover" onPress={onDiscoverPress} />
-          <MenuTile text="Subscriptions" onPress={onSubscriptionsPress} />
+          <MenuTile text="Subscribe" onPress={onSubscriptionsPress} />
         </View>
       </View>
     </View>

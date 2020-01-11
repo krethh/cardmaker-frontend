@@ -8,7 +8,7 @@ const PotentialSubscription = props => {
         <TouchableOpacity onPress={props.onPress}>
             <View>
                 <Text style={styles.name}>{props.name}</Text>
-                <Text style={styles.owner}>{props.owner}</Text>
+                <Text style={styles.owner}>{props.creatorId}</Text>
             </View>
         </TouchableOpacity>
     );

@@ -5,7 +5,7 @@ import Colors from '../../utils/Colors'
 const SelectableDeck = props => {
 
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.text}>{props.name}</Text>
             <TouchableOpacity style={styles.circle} onPress={props.onPress} >
                 {props.checked && <View style={styles.checkedCircle} />}
@@ -41,6 +41,9 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         backgroundColor: Colors.Blue,
     },
+    container: {
+        margin: 10
+    }
 });
 
 export default SelectableDeck
