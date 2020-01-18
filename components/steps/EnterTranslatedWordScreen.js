@@ -8,9 +8,12 @@ import Translation from './Translation'
 const EnterTranslatedWordScreen = props => {
   const [isIndicatorActive, setIsIndicatorActive] = useState(false);
   const [noResults, setNoResults] = useState(false);
+  const [customTranslationMode, setCustomTranslationMode] = useState(false)
+  const [customTranslation, setCustomTranslation] = useState("")
 
   const handleContinue = () => {
     setIsIndicatorActive(true);
+    setCustomTranslationMode(false);
 
     const url = `${Constants.PONS_API}?l=${props.config.defaultTargetLanguage.code}&in=${props.config.defaultTargetLanguage.source}&q=${props.currentCard.translatedWord}`
 
@@ -30,6 +33,20 @@ const EnterTranslatedWordScreen = props => {
       })
   }
 
+  const handleEnterCustomTranslation = () => {
+    if (!customTranslationMode) {
+      setCustomTranslationMode(true);
+      return;
+    }
+
+    props.setChosenCard({
+      front: props.currentCard.translatedWord,
+      back: customTranslation
+    });
+
+    props.navigation.navigate('SelectImage')
+  }
+
   const handleOnTranslationPress = translation => {
     props.setChosenCard(translation);
     props.navigation.navigate('SelectImage')
@@ -45,15 +62,17 @@ const EnterTranslatedWordScreen = props => {
         multiline={true}
         placeholder="Word to translate"
       />
-      <Button
-        title="CONTINUE"
-        disabled={!props.currentCard.translatedWord}
-        onPress={handleContinue}
-      />
+      <View style={styles.buttonContainer}>
+        <Button
+          title="CONTINUE"
+          disabled={!props.currentCard.translatedWord}
+          onPress={handleContinue}
+        />
+      </View>
       {isIndicatorActive && (
         <ActivityIndicator size={60} color={Colors.Purple} />
       )}
-      {(props.currentCard.apiResponse && props.currentCard.apiResponse.translations) &&
+      {(props.currentCard.apiResponse && props.currentCard.apiResponse.translations) && !customTranslationMode &&
         <View style={styles.flatListContainer}>
           <FlatList
             data={props.currentCard.apiResponse.translations}
@@ -62,11 +81,26 @@ const EnterTranslatedWordScreen = props => {
           />
         </View>
       }
-      {noResults && 
+      {customTranslationMode && (
+        <TextInput
+          style={styles.inputStyle}
+          value={customTranslation}
+          onChangeText={text => setCustomTranslation(text)}
+          multiline={false}
+          placeholder="Custom translation"
+        />
+      )}
+      {noResults &&
         <View style={styles.flatListContainer}>
           <Text style={styles.noResultsText}>No results or erroneous query</Text>
         </View>
       }
+      <View style={styles.buttonContainer}>
+        <Button
+          title={customTranslationMode ? "CONTINUE" : "ENTER CUSTOM TRANSLATION"}
+          onPress={handleEnterCustomTranslation}
+        />
+      </View>
     </View>
   );
 }
@@ -85,12 +119,15 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     marginTop: 10,
-    marginBottom: 80,
-    maxHeight: "60%"
+    marginBottom: 50,
+    maxHeight: "55%"
   },
   noResultsText: {
     fontSize: 24,
     fontWeight: "bold"
+  },
+  buttonContainer: {
+    marginBottom: 15
   }
 });
 

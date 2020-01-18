@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Picker, StatusBar } from 'react-native';
+import { View, StyleSheet, Text, Button, TextInput, Picker, StatusBar } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Languages from '../config/Languages'
 import { Header } from 'react-navigation-stack';
@@ -23,6 +23,10 @@ const Settings = props => {
         }
     }, [])
 
+    handleLogoutPress = () => {
+        props.setSessionToken(null)
+    }
+
     return (
             <KeyboardAwareScrollView enableAutomaticScroll extraHeight={KEYBOARD_VERTICAL_OFFSET} extraScrollHeight={50} enableOnAndroid >
                 <Text style={styles.label}>
@@ -35,7 +39,7 @@ const Settings = props => {
                         onChangeText={text => props.setDictionarySecret(text)}
                         multiline={true}
                         placeholder="Dictionary API Secret"
-                        numberOfLines={5}
+                        numberOfLines={2}
                     />
                 </View>
                 <Text style={styles.label}>
@@ -48,7 +52,7 @@ const Settings = props => {
                         onChangeText={text => props.setPixabaySecret(text)}
                         multiline={true}
                         placeholder="Pixabay API Secret"
-                        numberOfLines={5}
+                        numberOfLines={1}
                     />
                 </View>
                 <Text style={styles.label}>
@@ -77,6 +81,13 @@ const Settings = props => {
                         placeholder="Backend URL"
                     />
                 </View>
+                <View style={styles.buttonContainer}>
+                    <Button 
+                        title="LOGOUT"
+                        disabled={!props.config.sessionToken}
+                        onPress={handleLogoutPress}
+                    />
+                </View>
             </KeyboardAwareScrollView>
     )
 }
@@ -102,6 +113,10 @@ const styles = StyleSheet.create({
         borderColor: "black",
         elevation: 1,
         margin: 15
+    },
+    buttonContainer: {
+        margin: 15,
+        width: "90%"
     }
 })
 

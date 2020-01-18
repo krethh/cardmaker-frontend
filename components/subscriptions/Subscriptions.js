@@ -74,11 +74,16 @@ const Subscriptions = props => {
             />
             {subscribableDecks && (
                 <View>
-                    <FlatList
-                        data={subscribableDecks}
-                        renderItem={({ item }) => <PotentialSubscribtion  {...item} onPress={() => handleOnDeckPress(item.deckId)} />}
-                        keyExtractor={deck => deck.deckId}
-                    />
+                    {subscribableDecks.length > 0 && (
+                       <FlatList
+                            data={subscribableDecks}
+                            renderItem={({ item }) => <PotentialSubscribtion  {...item} onPress={() => handleOnDeckPress(item.deckId)} />}
+                            keyExtractor={deck => deck.deckId}
+                        />     
+                    )}
+                    {subscribableDecks.length == 0 && (
+                        <Text style={styles.label}>No decks found!</Text>
+                    )}
                 </View>
             )}
             {errorMessage && (

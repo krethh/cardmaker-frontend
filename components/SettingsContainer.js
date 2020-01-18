@@ -3,7 +3,8 @@ import {
     setDictionarySecret, 
     setDefaultTargetLanguage,
     setPixabaySecret,
-    setBackendUrl
+    setBackendUrl,
+    setSessionToken
  } from '../actions/ConfigActions'
 import Settings from './Settings'
 
@@ -17,7 +18,8 @@ const SettingsContainer = connect(mapStateToProps, {
     setDictionarySecret,
     setDefaultTargetLanguage,
     setPixabaySecret,
-    setBackendUrl
+    setBackendUrl,
+    setSessionToken
 })(Settings);
 
 export default SettingsContainer;
